@@ -1,0 +1,123 @@
+<html>
+  <head>
+    <title>TREND.NXT - HTML L2</title>
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+    />
+    <style>
+      body {
+        background-color: faf0af;
+      }
+
+      .padding {
+        margin: 100px 32% 0% 20%;
+        text-align: right;
+      }
+
+      .containers {
+        -webkit-filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.7));
+        filter: drop-shadow(5px 5px 5px rgba(0, 0, 0, 0.7));
+        width: 50px;
+        height: 100px;
+        margin: 20px 0 0 550px;
+        position: relative;
+      }
+
+      .circleHolder {
+        width: 120px;
+        height: 120px;
+        position: absolute;
+        left: -110;
+      }
+
+      .circle {
+        width: 250px;
+        height: 250px;
+        position: absolute;
+        right: 0;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="jumbotron">
+      <h1 class="display-3">TREND.NXT - HTML L2</h1>
+      <h3 class="display-4" style="font-size: 40px;">
+        Previous Location :
+        <span id="location"></span>
+      </h3>
+    </div>
+
+    <div class="padding">
+      <div class="containers">
+        <div class="circle">
+          <svg width="200" height="200">
+            <circle id="abc" cx="100" cy="95" r="90" fill="lawngreen"></circle>
+          </svg>
+        </div>
+
+        <section
+          class="circleHolder"
+          style="top: 30px;"
+          ondrop="drop(event)"
+          ondragover="dragOver(event)"
+        ></section>
+      </div>
+
+      <div class="containers">
+        <div class="circle" style="top: 130;">
+          <svg width="200" height="200">
+            <circle id="abc" cx="100" cy="95" r="90" fill="yellow"></circle>
+          </svg>
+        </div>
+
+        <section
+          class="circleHolder"
+          style="top: 160px;"
+          ondrop="drop(event)"
+          ondragover="dragOver(event)"
+        ></section>
+      </div>
+
+      <img id="drag" src="giphy.gif" draggable="true" ondragstart="drag(event)"
+      width="120" height="120"/ style="border-radius: 50%;">
+    </div>
+
+    <script>
+      let locationDisplay = document.getElementById("location");
+
+      function dragOver(ev) {
+        ev.preventDefault();
+      }
+
+      function drag(ev) {
+        ev.dataTransfer.setData("text", ev.target.id);
+      }
+
+      function drop(ev) {
+        ev.preventDefault();
+        var data = ev.dataTransfer.getData("text");
+        ev.target.appendChild(document.getElementById(data));
+      }
+
+      function storeLocation() {
+        navigator.geolocation.watchPosition(storeInLocalStorage);
+      }
+
+      function storeInLocalStorage(position) {
+        localStorage.setItem("latitude", position.coords.latitude);
+        localStorage.setItem("longitude", position.coords.longitude);
+      }
+
+      function displayLocation() {
+        lat = localStorage.getItem("latitude");
+        long = localStorage.getItem("longitude");
+        locationDisplay.innerHTML =
+          "Latitude: " + lat + " | Longitude: " + long;
+      }
+      document.onunload = storeLocation();
+      document.onload = displayLocation();
+    </script>
+  </body>
+</html>
