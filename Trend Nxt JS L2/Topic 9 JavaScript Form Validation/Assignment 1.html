@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script>
+      function validateForm() {
+        var pin = document.forms["myForm"]["pinCode"].value;
+        var pattern = new RegExp(/^\d{6}$/); // because pin code is 6 characters e.g 560072
+        if (!!pattern.test(pin)) {
+          alert("Pin Code Valid");
+          return true;
+        } else {
+          alert("Pin Code is not Valid");
+          return false;
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <form name="myForm" onsubmit="return validateForm()" method="post">
+      Pin Code: <input type="text" name="pinCode" />
+      <input type="submit" value="Submit" />
+    </form>
+  </body>
+</html>

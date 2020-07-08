@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <body>
+    <p id="demo" style="width: 30vw;">
+      Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga ratione
+      facilis dignissimos neque aliquam provident, fugiat, fugit nam incidunt
+      quasi nisi, sed doloremque in adipisci quo minus nobis placeat alias?
+    </p>
+
+    <button onclick="myFunction()">Change Background Color</button>
+
+    <script>
+      function myFunction() {
+        var person = prompt("Please enter a valid css color", "yellow");
+        if (person != null) {
+          document.getElementById("demo").style.backgroundColor = person;
+        }
+      }
+    </script>
+  </body>
+</html>
